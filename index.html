@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Word 7</title>
+    <link rel="stylesheet" href="https://unpkg.com/7.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none !important;
+            color: #222222 !important;
+        }
+
+
+
+        .page {
+            width: 100%;
+            height: 100vh;
+            /* background-color: #047e7e; */
+            background-image: url(assets/img/windows-7.jpg);
+            background-position: center;
+            /* Center the image */
+            background-repeat: no-repeat;
+            /* Do not repeat the image */
+            background-size: cover;
+            /* Resize the background image to cover the entire container */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
+        #mydiv {
+            z-index: 9;
+            position: absolute;
+
+        }
+
+        #mydivheader.grabbed {
+            cursor: wait;
+        }
+
+
+        #mydivheader {
+            padding: 10px;
+            cursor: default;
+            z-index: 10;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 50px;
+        }
+
+        .content {
+            margin-bottom: 10px;
+
+        }
+
+        .content-label {
+            margin-bottom: 5px;
+        }
+
+        .content-label-p {
+            margin-bottom: 20px;
+        }
+
+        .selection-drop {
+            position: fixed !important;
+            top: 15px;
+            right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page" id="limitingDiv">
+        <div class="window active selection-drop" style="width: 200px">
+            <div class="title-bar">
+              <div class="title-bar-text">Select OS</div>
+              <div class="title-bar-controls">
+                <button aria-label="Minimize"></button>
+                <button aria-label="Maximize"></button>
+                <button aria-label="Close"></button>
+              </div>
+            </div>
+            <div class="window-body has-space">
+                <select onchange="urlHandler(this.value)">
+                    <option value="index.html">Windows 7</option>
+                    <option value="windows-98.html">Windows 98</option>
+                    <option value="windows-xp.html">Windows XP</option>
+                </select>
+            </div>
+          </div>
+        <!-- <select onchange="urlHandler(this.value)" class="selection-drop">
+            <option value="windows-7.html">Windows 7</option>
+            <option value="windows-98.html">Windows 98</option>
+            <option value="windows-xp.html">Windows XP</option>
+        </select> -->
+        <div class="window glass active" id="mydiv" style="width: 400px;">
+            <div class="title-bar" id="mydivheader">
+                <div class="title-bar-text">Magic Word</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize"></button>
+                    <button aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-body has-space">
+                <menu role="tablist" aria-label="Window with Tabs">
+                    <button role="tab" aria-controls="m365" aria-selected="true">M365</button>
+                    <button role="tab" aria-controls="exchange">Exchange</button>
+                    <button role="tab" aria-controls="entraID">Entra ID</button>
+                    <button role="tab" aria-controls="autotask">Autotask</button>
+                </menu>
+                <article role="tabpanel" id="m365">
+                    <p class="content-label-p">Bienvenue sur les liens utiles à la gestion quotidienne du portail
+                        Microsoft 365. Pour accéder à la console de gestion, cliquez sur le lien auquel vous voulez
+                        accéder.</p>
+                    <div class="box">
+                        <div id="box-content">
+                            <div class="content">
+                                <p class="content-label">Liste des utilisateurs :</p>
+                                <button><a href="https://admin.microsoft.com/Adminportal/Home#/users"
+                                        target="_blank">Users</a></button>
+                            </div>
+                            <div class="content">
+                                <p class="content-label">Liste des licences :</p>
+                                <button><a href="https://admin.microsoft.com/Adminportal/Home#/licenses"
+                                        target="_blank">Licenses</a></button>
+                            </div>
+                        </div>
+                        <div id="box-content">
+                            <div class="content">
+                                <p class="content-label">Liste des produits :</p>
+                                <button><a href="https://admin.microsoft.com/Adminportal/Home#/subscriptions"
+                                        target="_blank">Products</a></button>
+                            </div>
+                            <div class="content">
+                                <p class="content-label">Liste des domaines :</p>
+                                <button><a href="https://admin.microsoft.com/Adminportal/Home#/Domains"
+                                        target="_blank">Domains</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article role="tabpanel" hidden id="exchange">
+                    <p class="content-label-p">Bienvenue sur les liens utiles à la gestion quotidienne du portail
+                        Exchange. Pour accéder à la console de gestion, cliquez sur le lien auquel vous voulez accéder.
+                    </p>
+                    <div class="box">
+                        <div id="box-content">
+                            <div class="content">
+                                <p class="content-label">Liste des mailbox :</p>
+                                <button><a
+                                        href="https://admin.exchange.microsoft.com/?landingpage=mailboxes&form=mac_sidebar#/"
+                                        target="_blank">Mailboxes</a></button>
+                            </div>
+                            <div class="content">
+                                <p class="content-label">Flux de courrier :</p>
+                                <button><a href="https://admin.exchange.microsoft.com/#/messagetrace"
+                                        target="_blank">Messages</a></button>
+                            </div>
+                        </div>
+                        <div id="box-content">
+                            <div class="content">
+                                <p class="content-label">Quarantaine :</p>
+                                <button><a href="https://security.microsoft.com/quarantine"
+                                        target="_blank">Covid</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article role="tabpanel" hidden id="entraID">
+                    <p class="content-label-p">Bienvenue sur les liens utiles à la gestion quotidienne du portail Entra
+                        ID. Pour accéder à la console de gestion, cliquez sur le lien auquel vous voulez accéder.</p>
+                    <div class="box">
+                        <div id="box-content">
+                            <div class="content">
+                                <p class="content-label">Liste des utilisateurs :</p>
+                                <button><a
+                                        href="https://entra.microsoft.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/AllUsers/menuId/"
+                                        target="_blank">Users</a></button>
+                            </div>
+                            <div class="content">
+                                <p class="content-label">Journaux de connexion :</p>
+                                <button><a
+                                        href="https://entra.microsoft.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/SignIns/menuId/"
+                                        target="_blank">Logs</a></button>
+                            </div>
+                            <div class="content">
+                                <p class="content-label">Restriction :</p>
+                                <button><a
+                                        href="https://security.microsoft.com/restrictedusers"
+                                        target="_blank">Users</a></button>
+                            </div>
+                        </div>
+                        <div id="box-content">
+                            <div class="content">
+                                <p class="content-label">Journaux d'audit :</p>
+                                <button><a
+                                        href="https://entra.microsoft.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/Audit/menuId/"
+                                        target="_blank">Logs</a></button>
+                            </div>
+                            <div class="content">
+                                <p class="content-label">Clé Bitlocker :</p>
+                                <button><a
+                                        href="https://entra.microsoft.com/#view/Microsoft_AAD_Devices/DevicesMenuBlade/~/recoveryKeys/menuId/recoveryKeys"
+                                        target="_blank">Keys</a></button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article role="tabpanel" hidden id="autotask">
+                    <p class="content-label-p">Bienvenue sur les liens utiles à la gestion quotidienne d'Autotask. Pour
+                        accéder à la console de gestion, cliquez sur le lien auquel vous voulez accéder.</p>
+                    <div class="box">
+                        <div id="box-content">
+                            <div class="content">
+                                <p class="content-label">Se connecter :</p>
+                                <button><a href="https://www.autotask.net/Mvc/Framework/Authentication.mvc/Authenticate"
+                                        target="_blank">Login</a></button>
+                            </div>
+                            <div class="content">
+                                <p class="content-label">Nouveau ticket :</p>
+                                <button><a
+                                        href="https://ww19.autotask.net/Mvc/ServiceDesk/TicketNew.mvc/Create?categoryId=3&ticketType=2"
+                                        target="_blank">Create</a></button>
+                            </div>
+                        </div>
+                        <!-- <div id="box-content">
+                            <div class="content">
+                                <p class="content-label">Journaux d'audit :</p>
+                                <button><a href="https://entra.microsoft.com/#view/Microsoft_AAD_UsersAndTenants/UserManagementMenuBlade/~/Audit/menuId/"
+                                        target="_blank">Logs</a></button>
+                            </div>
+                            <div class="content">
+                                <p class="content-label">Clé Bitlocker :</p>
+                                <button><a href="https://entra.microsoft.com/#view/Microsoft_AAD_Devices/DevicesMenuBlade/~/recoveryKeys/menuId/recoveryKeys"
+                                        target="_blank">Keys</a></button>
+                            </div>
+                        </div> -->
+                    </div>
+                </article>
+
+                <section class="field-row" style="justify-content: flex-end">
+                    <button class="default">OK</button>
+                    <button>Cancel</button>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/script/tabs.js"></script>
+    <script src="assets/script/drag-7.js"></script>
+    <script>
+        function urlHandler(value) {
+            window.location.assign(`${value}`);
+        }
+    </script>
+</body>
+
+</html>

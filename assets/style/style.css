@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+}
+
+.page {
+
+    width: 100vw;
+    height: 100vh;
+    background-color: #047e7e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+a {
+    text-decoration: none !important;
+    color:#222222 !important;
+}
+
+.card {
+    position: absolute;
+}
+
+.card-title {
+    cursor: move;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    margin-bottom: 10px;
+
+}
+
+.content-label {
+    margin-bottom: 5px;
+}
+
+
